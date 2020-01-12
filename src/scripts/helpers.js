@@ -45,10 +45,9 @@ function closeEditModal() {
  *  Parameters: 
  *      + Stringified JSON from JSON file
  *  Returns: 
- *      - Parsed JSON
- *      - null
+ *      - Formatted JSON or null
  */
-function getParsedJsonFromText(text) {
+function getParsedJson(text) {
     try {
         return JSON.parse(text);
     } catch (e) {
@@ -57,28 +56,97 @@ function getParsedJsonFromText(text) {
     }
 }
 
-//get and save functions for local storage
+/** Function description: 
+ *      Saves data to local storage
+ *  Parameters: 
+ *      + Data key
+ *      + Data (either json or normal data)
+ *  Returns: 
+ *      -  Stringified json data or normal data
+ */
 function saveDataToLocalStorage(dataKey, data) {
-    //NOTE: if data is json, conver to text to store.
     let formattedData = null;
     try {
         formattedData = JSON.stringify(data);
     } catch (e) {
-        //not a json, just use data as is.
+        // Save as normal data if not json 
         formattedData = data;
     }
     window.localStorage.setItem(dataKey, formattedData);
 }
 
+/** Function description: 
+ *      Get data from local storage
+ *  Parameters: 
+ *      + Data key
+ *  Returns: 
+ *      - Formatted json data or normal data
+ */
 function getDataFromLocalStorage(dataKey) {
-    //NOTE if data was originally json, unpack it from text to json
     let data = window.localStorage.getItem(dataKey);
     let formattedData = null;
     try {
         formattedData = JSON.parse(data);
     } catch (e) {
-        //not a json, just use data as is.
+        //get normal data if not json
         formattedData = data;
     }
     return formattedData;
+}
+/** Function description: 
+ *      Calculate data for one row of the table
+ *  Parameters: 
+ *      + row: one row from table
+ *  Returns: 
+ *      - Oject of row data 
+ */
+function calcRowData(row) {
+    let data = {
+        'STT': row['STT'],
+        'Họ và tên': row['Họ và tên'],
+        'Lương': row['Lương'],
+        'Thuế': (row['Lương'] * 15) / 100
+    };
+    return data;
+}
+/** Function description: 
+ *      Calculate data for tax table
+ *  Parameters: 
+ *      + table: taxData
+ *  Returns: 
+ *      - Array of objects of table data
+ */
+function calcTaxData(table) {
+    let data = [];
+    table.forEach(element => {
+        data.push(calcRowData(element));
+    });
+
+    return data;
+}
+
+/** Function description: 
+ *      Calculate sum row data at the end of the table
+ *  Parameters: 
+ *      + data
+ *  Returns: 
+ *      - Object of sum row data
+ */
+function calcSumRow(data) {
+    let salarySum = 0;
+    let taxSum = 0;
+
+    data.forEach(element => {
+        salarySum += Number(element['Lương']);
+        taxSum += Number(element['Thuế']);
+    });
+
+    let sumRow = {
+        'STT': '',
+        'Họ và tên': 'Tổng cộng',
+        'Lương': salarySum,
+        'Thuế': taxSum
+    };
+
+    return sumRow;
 }

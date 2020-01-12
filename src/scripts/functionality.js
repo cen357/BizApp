@@ -3,22 +3,22 @@ $(document).ready(function () {
     var counter = 2;
 
     // Initialize salary profile data for worksheet
-    var ws_data = [{
+    var profileData = [{
             "STT": 1,
             "Họ và tên": "Anthony",
-            "Lương": 0
+            "Lương": 100
         },
         {
             "STT": 2,
             "Họ và tên": 'Jane',
-            "Lương": 1
+            "Lương": 50
         }
     ];
 
     // Initialize datatable
     var $table = $('#dataTable');
     $table.bootstrapTable({
-        data: ws_data
+        data: profileData
     });
 
     // Download function
@@ -57,7 +57,7 @@ $(document).ready(function () {
         var reader = new FileReader();
         reader.onload = function (event) {
             var contents = event.target.result;
-            importData = getParsedJsonFromText(contents);
+            importData = getParsedJson(contents);
             $table.bootstrapTable('load', importData.data);
         };
 
@@ -113,6 +113,7 @@ $(document).ready(function () {
     // Remove selected profile
     $('#remove').on('click', function (e) {
         let selectedIndex = getIdSelection($table);
+
         // Stop action if no row is selected
         if (selectedIndex === -1) {
             alert("Vui lòng chọn dòng cần xóa");
@@ -133,11 +134,12 @@ $(document).ready(function () {
         }
     });
 
-    // Switch over to tax datatable page
+    // Switch over to tax table page
     $("#tax").on("click", function () {
-        let taxData = $table.bootstrapTable('getData');
-        saveDataToLocalStorage("dataTable", taxData);
+        // Save data from table to local storage for transfer
+        let setTransferData = $table.bootstrapTable('getData');
+        saveDataToLocalStorage("dataTable", setTransferData);
+        saveDataToLocalStorage("counter", counter);
         window.location.href = '../BizApp/tax.html';
     });
-
 });

@@ -73,7 +73,13 @@
             <!-- Button group -->
             <div class="d-flex justify-content-start align-items-center button-group">
                 <!-- Tax button -->
-                <Button class="btn btn-lg btn-info p-2 mr-auto" id="tax">Thue TNCN</Button>
+                <Button class="btn btn-lg btn-info p-2" id="tax">Thue TNCN</Button>
+
+                <!--  Import JSON file for dataTable -->
+                <button class="btn btn-lg btn-primary p-2 mr-auto" type="button" data-toggle="collapse"
+                    data-target="#upload">
+                    Tai len
+                </button>
 
                 <!-- Ultilities button -->
                 <button class="btn btn-lg btn-primary p-2" id="add" data-toggle="modal"
@@ -83,9 +89,8 @@
                 <button class="btn btn-lg btn-danger p-2" id="remove">Xóa</button>
             </div>
 
-            <!--  Import JSON file for dataTable -->
-            <div class="pb-0 mt-4">
-                <label for="import">Tải lên</label>
+            <div class="collapse pb-0 mt-4" id="upload">
+                <label for="import">JSON</label>
                 <input type="file" name="import" id="import" multiple>
             </div>
 
