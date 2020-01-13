@@ -4,14 +4,14 @@ $(document).ready(function () {
 
     // Initialize salary profile data for worksheet
     var profileData = [{
-            "STT": 1,
-            "Họ và tên": "Anthony",
-            "Lương": 100
+            "A": 1,
+            "B": "Anthony",
+            "1": 100
         },
         {
-            "STT": 2,
-            "Họ và tên": 'Jane',
-            "Lương": 50
+            "A": 2,
+            "B": 'Jane',
+            "1": 50
         }
     ];
 
@@ -33,14 +33,14 @@ $(document).ready(function () {
                         visible: $(this).val() === 'selected'
                     },
                     {
-                        field: 'STT',
-                        title: 'STT'
+                        field: 'A',
+                        title: 'A'
                     }, {
-                        field: 'Họ và tên',
-                        title: 'Họ và tên'
+                        field: 'B',
+                        title: 'B'
                     }, {
-                        field: 'Lương',
-                        title: 'Lương'
+                        field: '1',
+                        title: '1'
                     }
                 ]
             });
@@ -75,9 +75,9 @@ $(document).ready(function () {
         $table.bootstrapTable('insertRow', {
             index: counter,
             row: {
-                "STT": ++counter,
-                "Họ và tên": $('#add_name').val(),
-                "Lương": $('#add_salary').val()
+                "A": ++counter,
+                "B": $('#add_name').val(),
+                "1": $('#add_salary').val()
             }
         });
 
@@ -101,8 +101,8 @@ $(document).ready(function () {
         $table.bootstrapTable('updateRow', {
             index: selectedIndex - 1,
             row: {
-                "Họ và tên": $('#edit_name').val(),
-                "Lương": $('#edit_salary').val()
+                "A": $('#edit_name').val(),
+                "B": $('#edit_salary').val()
             }
         });
 
@@ -128,7 +128,7 @@ $(document).ready(function () {
         for (let index = selectedIndex; index <= counter; index++) {
             $table.bootstrapTable('updateCellByUniqueId', {
                 id: index + 1,
-                field: 'STT',
+                field: 'A',
                 value: index
             });
         }

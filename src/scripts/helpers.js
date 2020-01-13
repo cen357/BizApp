@@ -11,7 +11,7 @@ function getIdSelection($dataTable) {
     if (selected.length === 0) {
         return -1;
     }
-    return selected[0]['STT'];
+    return selected[0]['A'];
 }
 
 /** Function description: 
@@ -102,10 +102,10 @@ function getDataFromLocalStorage(dataKey) {
  */
 function calcRowData(row) {
     let data = {
-        'STT': row['STT'],
-        'Họ và tên': row['Họ và tên'],
-        'Lương': row['Lương'],
-        'Thuế': (row['Lương'] * 15) / 100
+        'A': row['A'],
+        'B': row['B'],
+        '1': row['1'],
+        '2=1*15%': (row['1'] * 15) / 100
     };
     return data;
 }
@@ -137,15 +137,15 @@ function calcSumRow(data) {
     let taxSum = 0;
 
     data.forEach(element => {
-        salarySum += Number(element['Lương']);
-        taxSum += Number(element['Thuế']);
+        salarySum += Number(element['1']);
+        taxSum += Number(element['2=1*15%']);
     });
 
     let sumRow = {
-        'STT': '',
-        'Họ và tên': 'Tổng cộng',
-        'Lương': salarySum,
-        'Thuế': taxSum
+        'A': '',
+        'B': 'Tổng cộng',
+        '1': salarySum,
+        '2=1*15%': taxSum
     };
 
     return sumRow;
