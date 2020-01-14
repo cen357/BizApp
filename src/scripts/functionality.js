@@ -58,8 +58,26 @@ $(document).ready(function () {
                         field: 'B',
                         title: 'B'
                     }, {
+                        field: 'C',
+                        title: 'C'
+                    }, {
                         field: '1',
                         title: '1'
+                    }, {
+                        field: '2',
+                        title: '2'
+                    }, {
+                        field: '3',
+                        title: '3'
+                    }, {
+                        field: '4',
+                        title: '4'
+                    }, {
+                        field: '5',
+                        title: '5'
+                    }, {
+                        field: '6',
+                        title: '6'
                     }
                 ]
             });
