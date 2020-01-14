@@ -15,6 +15,31 @@ function getIdSelection($dataTable) {
 }
 
 /** Function description: 
+ *      Delete input value in info modal and close it
+ *  Parameters: 
+ *      None
+ *  Returns: 
+ *      None
+ */
+function closeInfoModal() {
+    $("#add_time").val('');
+    $("#add_profit").val('');
+    $("#infoModal").modal('hide');
+}
+
+/** Function description: 
+ *      Delete input value in upload modal and close it
+ *  Parameters: 
+ *      None
+ *  Returns: 
+ *      None
+ */
+function closeUploadModal() {
+    $("#file").val('');
+    $("#uploadModal").modal('hide');
+}
+
+/** Function description: 
  *      Delete input value in add modal and close it
  *  Parameters: 
  *      None

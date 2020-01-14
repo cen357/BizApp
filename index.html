@@ -30,8 +30,8 @@
     <div class="app">
         <!--============================================ Header =================================================-->
         <!-- Navigation bar -->
-        <nav class="navbar navbar-expand-lg navbar-dark">
-            <a class="navbar-brand" href="#">BizApp</a>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-gradient">
+            <a class="navbar-brand" href="index.html">BizApp</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -51,7 +51,7 @@
                             Apps
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="tax.html">Thuế TNCN</a>
+                            <a class="dropdown-item" href="index.html">Thông tin nhân viên</a>
                         </div>
                     </li>
                 </ul>
@@ -66,20 +66,31 @@
         <!--============================================== Content ===================================================-->
         <div class="container">
             <!-- Title -->
-            <div id="title" class="title text-center p-2">
-                <h1>Thông tin nhân viên</h1>
+            <div id="title" class="text-center">
+                <h1 class="title">Thông tin nhân viên <span id="month"></span></h1>
+
+                <!-- Profit info button -->
+                <button type="button" id="info" class="btn btn-lg btn-warning p-2 text-white" data-toggle="modal"
+                    data-target="#infoModal">Thêm thông tin</button>
+
+                <!-- Profit display -->
+                <h2 id="infoDisplay" class="d-none">Doanh thu tháng <span id="time"></span> = <span id="profit"></span>
+                    VND
+                </h2>
             </div>
 
             <!-- Button group -->
-            <div class="d-flex justify-content-start align-items-center button-group">
-                <!-- Tax button -->
-                <Button class="btn btn-lg btn-primary p-2" id="tax">Thue TNCN</Button>
-
-                <!--  Import JSON file for dataTable -->
-                <button class="btn btn-lg btn-info p-2 mr-auto" type="button" data-toggle="collapse"
-                    data-target="#upload">
-                    Tai len
+            <div class="d-flex flex-wrap justify-content-start align-items-center button-group">
+                <!-- Generated tables button -->
+                <button class="btn btn-lg btn-primary p-2 mr-auto bg-gradient" type="button" data-toggle="collapse"
+                    data-target="#generate">
+                    Tạo bảng
                 </button>
+
+                <!-- Import JSON file -->
+                <button type="button" id="upload" class="btn btn-lg btn-success p-2" data-toggle="modal"
+                    data-target="#uploadModal">
+                    Tải lên</button>
 
                 <!-- Ultilities button -->
                 <button class="btn btn-lg btn-primary p-2" id="add" data-toggle="modal"
@@ -89,9 +100,17 @@
                 <button class="btn btn-lg btn-danger p-2" id="remove">Xóa</button>
             </div>
 
-            <div class="collapse pb-0 mt-4" id="upload">
-                <label for="import">JSON</label>
-                <input type="file" name="import" id="import" multiple>
+            <div class="collapse" id="generate">
+                <div class="card card-body">
+                    <div class="d-flex flex-wrap justify-content-center align-items-center p-2">
+                        <button class="btn btn-lg btn-secondary p-2 m-1 order-1" id="timesheet">Chấm Công</button>
+                        <button class="btn btn-lg btn-secondary p-2 m-1 order-2" id="overtime">Giờ Làm Thêm</button>
+                        <button class="btn btn-lg btn-secondary p-2 m-1 order-3" id="cafeteria">Tiền Cơm</button>
+                        <button class="btn btn-lg btn-secondary p-2 m-1 order-4" id="profit">Doanh Thu</button>
+                        <button class="btn btn-lg btn-secondary p-2 m-1 order-5" id="tax">Thuế TNCN</button>
+                        <button class="btn btn-lg btn-secondary p-2 m-1 order-6" id="salary">Lương</button>
+                    </div>
+                </div>
             </div>
 
             <!-- Data Table  -->
@@ -101,13 +120,32 @@
                 100%;">
                 <thead class="text-center table-header">
                     <tr>
+                        <th></th>
+                        <th>STT</th>
+                        <th>Họ và tên</th>
+                        <th>Chức danh nghề nghiệp</th>
+                        <th>Mã số thuế</th>
+                        <th>Mức lương</th>
+                        <th>Ngày công</th>
+                        <th>Ngày công (tiền cơm)</th>
+                        <th>Giờ làm thêm</th>
+                        <th>Tỉ lệ % khoản bổ sung</th>
+                    </tr>
+
+                    <tr>
                         <th data-field="state" data-checkbox="true"></th>
                         <th data-field="A">A</th>
                         <th data-field="B">B</th>
+                        <th data-field="C">C</th>
                         <th data-field="1">1</th>
+                        <th data-field="2">2</th>
+                        <th data-field="3">3</th>
+                        <th data-field="4">4</th>
+                        <th data-field="5">5</th>
+                        <th data-field="6">6</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="text-center">
                 </tbody>
             </table>
         </div>
@@ -115,10 +153,74 @@
     <!--====================================== End of content =================================================-->
 
     <!--=========================================== Modals ====================================================-->
+    <!-- Info modal -->
+    <div class="modal fade" id="infoModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content shadow rounded">
+
+                <!-- Modal header -->
+                <div class="modal-header text-center bg-warning text-white">
+                    <h4 class="modal-title w-100 font-weight-bold">THÔNG TIN TỔNG HỢP</h4>
+                    <button class="close" data-dismiss="modal" type="button">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body mx-3">
+                    <!-- Time -->
+                    <div class="md-form">
+                        <i class="fas fa-calendar prefix" style="color: grey"></i>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_time">Nhập thời gian
+                            (tháng/năm)</label>
+                        <input class="form-control" id="add_time" name="timeInput" type="text" placeholder="12/2019">
+                    </div>
+
+                    <!-- Profit -->
+                    <div class="md-form">
+                        <i class="fas fa-dollar-sign prefix" style="color: grey"></i>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_profit">Nhập doanh thu</label>
+                        <input class="form-control" id="add_profit" name="profitInput" type="text"
+                            placeholder="900000000000000">
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-warning" id="info_save">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload modal -->
+    <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content shadow rounded">
+
+                <!-- Modal header -->
+                <div class="modal-header text-center bg-success text-white">
+                    <h4 class="modal-title w-100 font-weight-bold">TẢI LÊN</h4>
+                    <button class="close" data-dismiss="modal" type="button">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body mx-3">
+                    <div class="mb-3 text-info font-weight-bold">Chọn file JSON từ máy (Ví dụ: ExportTable.json) </div>
+                    <label for="file">JSON</label>
+                    <input type="file" name="uploadInput" id="file">
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-success" id="upload_save">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Add Modal -->
-    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content shadow rounded">
 
@@ -129,33 +231,79 @@
                 </div>
 
                 <!-- Modal body -->
-                <div id="test">
-                    <div class="modal-body mx-3">
-                        <!-- Name input -->
-                        <div class="md-form">
-                            <i class="fas fa-pen prefix" style="color: grey"></i>
-                            <label class="text-secondary font-weight-bold ml-1" for="name">Họ và tên</label>
-                            <input class="form-control" id="add_name" name="nameInput" type="text"
-                                placeholder="Trần Đặng Thị Bích Vân">
-                        </div>
-
-                        <!-- Salary input -->
-                        <div class="md-form">
-                            <i class="fas fa-dollar-sign prefix" style="color: grey"></i>
-                            <label class="text-secondary font-weight-bold ml-1" for="salary">Lương</label>
-                            <input class="form-control" id="add_salary" name="salaryInput" type="text" placeholder="0"
-                                required>
-                        </div>
+                <div class="modal-body mx-3">
+                    <!-- Name input -->
+                    <div class="md-form">
+                        <i class="fas fa-pen prefix" style="color: grey"></i>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_name">Họ và tên</label>
+                        <input class="form-control" id="add_name" name="nameInput" type="text"
+                            placeholder="Nguyễn Văn A">
                     </div>
 
-                    <!-- Modal footer -->
-                    <div class="modal-footer d-flex justify-content-end py-2">
-                        <button class="btn btn-secondary" id="add_cancel" data-dismiss="modal">Hủy</button>
-                        <button type="submit" class="btn btn-primary" id="add_save">Lưu</button>
+                    <!-- Job title input -->
+                    <div class="md-form">
+                        <i class="fas fa-suitcase prefix" style="color: grey"></i>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_job">Chức danh nghề
+                            nghiệp</label>
+                        <input class="form-control" id="add_job" name="jobInput" type="text" placeholder="Giám đốc"
+                            required>
                     </div>
+
+                    <!-- Tax ID input -->
+                    <div class="md-form">
+                        <i class="fas fa-address-card prefix" style="color: grey"></i>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_taxId">Mã số thuế</label>
+                        <input class="form-control" id="add_taxId" name="taxIdInput" type="text"
+                            placeholder="8015731510">
+                    </div>
+
+                    <!-- Base salary input -->
+                    <div class="md-form">
+                        <i class="fas fa-dollar-sign prefix" style="color: grey"></i>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_salary">Mức lương</label>
+                        <input class="form-control" id="add_salary" name="salaryInput" type="text"
+                            placeholder="5000000">
+                    </div>
+
+                    <!-- Workdays input -->
+                    <div class="md-form">
+                        <i class="fas fa-calendar prefix" style="color: grey"></i>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="workdays">Ngày công</label>
+                        <input class="form-control" id="add_workdays" name="workdaysInput" type="text" placeholder="25">
+                    </div>
+
+                    <!-- Cafeteria days input -->
+                    <div class="md-form">
+                        <i class="fas fa-hamburger prefix" style="color: grey"></i>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_name">Ngày công (tiền
+                            cơm)</label>
+                        <input class="form-control" id="add_cafe" name="cafeInput" type="text" placeholder="25">
+                    </div>
+
+                    <!-- Overtime hours input -->
+                    <div class="md-form">
+                        <i class="fas fa-clock prefix" style="color: grey"></i>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_overtime">Giờ làm thêm</label>
+                        <input class="form-control" id="add_overtime" name="overtimeInput" type="text" placeholder="16">
+                    </div>
+
+                    <!-- Bonus rate input -->
+                    <div class="md-form">
+                        <i class="fas fa-percent prefix" style="color: grey"></i>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_bonus">Tỉ lệ % khoản bổ
+                            sung</label>
+                        <input class="form-control" id="add_bonus" name="bonusInput" type="text" placeholder="38">
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer d-flex justify-content-end py-2">
+                    <button class="btn btn-secondary" id="add_cancel" data-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-primary" id="add_save">Lưu</button>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <!-- Edit Modal -->
@@ -175,16 +323,67 @@
                     <!-- Name input -->
                     <div class="md-form">
                         <i class="fas fa-pen prefix" style="color: grey"></i>
-                        <label class="text-secondary font-weight-bold ml-1" for="name">Họ và tên</label>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_name">Họ và tên</label>
                         <input class="form-control" id="edit_name" name="nameInput" type="text"
-                            placeholder="Trần Đặng Thị Bích Vân" required>
+                            placeholder="Nguyễn Thị B" required>
                     </div>
 
-                    <!-- Salary input -->
+                    <!-- Job title input -->
+                    <div class="md-form">
+                        <i class="fas fa-suitcase prefix" style="color: grey"></i>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_job">Chức danh nghề
+                            nghiệp</label>
+                        <input class="form-control" id="edit_job" name="nameInput" type="text"
+                            placeholder="Phó giám đốc" required>
+                    </div>
+
+                    <!-- Tax ID input -->
+                    <div class="md-form">
+                        <i class="fas fa-address-card prefix" style="color: grey"></i>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_taxId">Mã số thuế</label>
+                        <input class="form-control" id="edit_TaxId" name="TaxIdInput" type="text"
+                            placeholder="8015731510" required>
+                    </div>
+
+                    <!-- Base salary input -->
                     <div class="md-form">
                         <i class="fas fa-dollar-sign prefix" style="color: grey"></i>
-                        <label class="text-secondary font-weight-bold ml-1" for="salary">Lương</label>
-                        <input class="form-control" id="edit_salary" name="salaryInput" type="text" placeholder="0"
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_salary">Mức Lương</label>
+                        <input class="form-control" id="edit_salary" name="salaryInput" type="text"
+                            placeholder="3000000" required>
+                    </div>
+                    <!-- Workdays input -->
+                    <div class="md-form">
+                        <i class="fas fa-calendar prefix" style="color: grey"></i>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_workdays">Ngày công</label>
+                        <input class="form-control" id="edit_workdays" name="workdaysInput" type="text" placeholder="16"
+                            required>
+                    </div>
+
+                    <!-- Cafeteria days input -->
+                    <div class="md-form">
+                        <i class="fas fa-hamburger prefix" style="color: grey"></i>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_cafe">Ngày công (Tiền
+                            cơm)</label>
+                        <input class="form-control" id="edit_cafe" name="cafeInput" type="text" placeholder="16"
+                            required>
+                    </div>
+
+                    <!-- Overtime hours input -->
+                    <div class="md-form">
+                        <i class="fas fa-clock prefix" style="color: grey"></i>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_overtime">Giờ làm
+                            thêm</label>
+                        <input class="form-control" id="edit_overtime" name="overtimeInput" type="text" placeholder="10"
+                            required>
+                    </div>
+
+                    <!-- Bonus rate input -->
+                    <div class="md-form">
+                        <i class="fas fa-percent prefix" style="color: grey"></i>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_bonus">Tỉ lệ % khoản bổ
+                            sung</label>
+                        <input class="form-control" id="edit_bonus" name="bonusInput" type="text" placeholder="20"
                             required>
                     </div>
                 </div>
