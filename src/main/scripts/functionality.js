@@ -236,7 +236,7 @@ $(document).ready(function () {
         saveDataToLocalStorage("dataTable", setTransferData);
         saveDataToLocalStorage("infoData", Info);
         saveDataToLocalStorage("counter", counter);
-        window.location.href = '../BizApp/tax.html';
+        window.location.href = '../modules/timesheet/timesheet.html';
     });
 
     // Switch over to overtime table page
@@ -246,17 +246,17 @@ $(document).ready(function () {
         saveDataToLocalStorage("dataTable", setTransferData);
         saveDataToLocalStorage("infoData", Info);
         saveDataToLocalStorage("counter", counter);
-        window.location.href = '../BizApp/overtime.html';
+        window.location.href = '../modules/overtime/overtime.html';
     });
 
     // Switch over to cafeteria table page
-    $("#cafeteria").on("click", function () {
+    $("#cafe").on("click", function () {
         // Save data from table to local storage for transfer
         let setTransferData = $table.bootstrapTable('getData');
         saveDataToLocalStorage("dataTable", setTransferData);
         saveDataToLocalStorage("infoData", Info);
         saveDataToLocalStorage("counter", counter);
-        window.location.href = '../BizApp/tax.html';
+        window.location.href = '../modules/overtime/cafe.html';
     });
 
     // Switch over to profit table page
@@ -266,7 +266,7 @@ $(document).ready(function () {
         saveDataToLocalStorage("dataTable", setTransferData);
         saveDataToLocalStorage("infoData", Info);
         saveDataToLocalStorage("counter", counter);
-        window.location.href = '../BizApp/tax.html';
+        window.location.href = '../modules/profit/profit.html';
     });
 
     // Switch over to tax table page
@@ -276,7 +276,7 @@ $(document).ready(function () {
         saveDataToLocalStorage("dataTable", setTransferData);
         saveDataToLocalStorage("infoData", Info);
         saveDataToLocalStorage("counter", counter);
-        window.location.href = '../BizApp/tax.html';
+        window.location.href = '../modules/tax/tax.html';
     });
 
     // Switch over to salary table page
@@ -286,6 +286,6 @@ $(document).ready(function () {
         saveDataToLocalStorage("dataTable", setTransferData);
         saveDataToLocalStorage("infoData", Info);
         saveDataToLocalStorage("counter", counter);
-        window.location.href = '../BizApp/tax.html';
+        window.location.href = '../modules/salary/salary.html';
     });
 });
