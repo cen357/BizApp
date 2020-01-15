@@ -14,6 +14,23 @@ function getIdSelection($dataTable) {
     return selected[0]['A'];
 }
 
+/** Function description:
+ *      Generate button is only available if table is not empty and profit is added 
+ *  Parameter:
+ *      + profileCounter: number of rows (profiles) currently exist
+ *      + profitData: total profit of the company
+ *  Returns: 
+ *      - None
+ */
+function checkGenerateButton(profileCounter, profitData) {
+    let generate = document.querySelector('#generateButton');
+    if ((profileCounter === 0) && (profitData === 0)) {
+        generate.disabled = true;
+    } else {
+        generate.disabled = false;
+    }
+}
+
 /** Function description: 
  *      Delete input value in info modal and close it
  *  Parameters: 
@@ -55,6 +72,7 @@ function closeAddModal() {
     $("#add_cafe").val('');
     $("#add_overtime").val('');
     $("#add_bonus").val('');
+    $("#add_avgSalary").val('');
     $("#addModal").modal('hide');
 }
 
@@ -74,6 +92,7 @@ function closeEditModal() {
     $("#edit_cafe").val('');
     $("#edit_overtime").val('');
     $("#edit_bonus").val('');
+    $("#edit_avgSalary").val('');
     $("#editModal").modal('hide');
 }
 
@@ -138,7 +157,7 @@ function getDataFromLocalStorage(dataKey) {
  *  Returns: 
  *      - Oject of row data 
  */
-function calcRowData(row) {
+function calcTaxRowData(row) {
     let data = {
         'A': row['A'],
         'B': row['B'],
@@ -158,7 +177,7 @@ function calcRowData(row) {
 function calcTaxData(table) {
     let data = [];
     table.forEach(element => {
-        data.push(calcRowData(element));
+        data.push(calcTaxRowData(element));
     });
 
     return data;
@@ -171,7 +190,7 @@ function calcTaxData(table) {
  *  Returns: 
  *      - Object of sum row data
  */
-function calcSumRow(data) {
+function calcTaxSumRow(data) {
     let salarySum = 0;
     let taxSum = 0;
 

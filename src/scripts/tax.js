@@ -5,7 +5,7 @@ $(document).ready(function () {
 
     // Calculate tax data 
     let taxData = calcTaxData(getTransferData);
-    taxData.push(calcSumRow(taxData));
+    taxData.push(calcTaxSumRow(taxData));
 
     // Initialize tax datatable
     let $taxTable = $('#taxTable');

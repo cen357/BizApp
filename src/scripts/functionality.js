@@ -24,7 +24,8 @@ $(document).ready(function () {
             "3": 14,
             "4": 14,
             "5": 2,
-            "6": 1
+            "6": 1,
+            "7": 32
         },
         {
             "A": 2,
@@ -35,7 +36,8 @@ $(document).ready(function () {
             "3": 10,
             "4": 10,
             "5": 4,
-            "6": 5
+            "6": 5,
+            "7": 30
         }
     ];
 
@@ -45,16 +47,6 @@ $(document).ready(function () {
     $table.bootstrapTable({
         data: profileData
     });
-
-    // Generate button is only available if table is not empty and profit is added
-    window.setInterval(function () {
-        let generate = document.querySelector('#generateButton');
-        if ((counter === 0) && (Info.profit === 0)) {
-            generate.disabled = true;
-        } else {
-            generate.disabled = false;
-        }
-    }, 1);
 
     // Download function
     var $toolbar;
@@ -96,6 +88,9 @@ $(document).ready(function () {
                     }, {
                         field: '6',
                         title: '6'
+                    }, {
+                        field: '7',
+                        title: '7'
                     }
                 ]
             });
@@ -111,6 +106,8 @@ $(document).ready(function () {
             $('#infoDisplay #profit').text(Info.profit);
             $('#info').addClass('d-none');
             $('#infoDisplay').removeClass('d-none');
+
+            checkGenerateButton(counter, Info.profit);
             closeInfoModal();
         });
 
@@ -143,6 +140,8 @@ $(document).ready(function () {
 
         $('#upload_save').on('click', function () {
             $table.bootstrapTable('load', importData.data);
+
+            checkGenerateButton(counter, Info.profit);
             closeUploadModal();
         });
     });
@@ -161,11 +160,12 @@ $(document).ready(function () {
                     "3": Number($('#add_workdays').val()),
                     "4": Number($('#add_cafe').val()),
                     "5": Number($('#add_overtime').val()),
-                    "6": Number($('#add_bonus').val())
+                    "6": Number($('#add_bonus').val()),
+                    "7": Number($('#add_avgSalary').val())
                 }
             });
-            console.log($table.bootstrapTable('getData'));
-            // Empty input and close modal
+
+            checkGenerateButton(counter, Info.profit);
             closeAddModal();
         });
     });
@@ -195,11 +195,12 @@ $(document).ready(function () {
                 "3": Number($('#edit_workdays').val()),
                 "4": Number($('#edit_cafe').val()),
                 "5": Number($('#edit_overtime').val()),
-                "6": Number($('#edit_bonus').val())
+                "6": Number($('#edit_bonus').val()),
+                "7": Number($('#edit_avgSalary').val())
             }
         });
 
-        // Empty input and close modal
+        checkGenerateButton(counter, Info.profit);
         closeEditModal();
     });
 
@@ -225,6 +226,7 @@ $(document).ready(function () {
                 value: index
             });
         }
+        checkGenerateButton(counter, Info.profit);
     });
 
     // Switch over to timesheet table page
@@ -244,7 +246,7 @@ $(document).ready(function () {
         saveDataToLocalStorage("dataTable", setTransferData);
         saveDataToLocalStorage("infoData", Info);
         saveDataToLocalStorage("counter", counter);
-        window.location.href = '../BizApp/tax.html';
+        window.location.href = '../BizApp/overtime.html';
     });
 
     // Switch over to cafeteria table page
