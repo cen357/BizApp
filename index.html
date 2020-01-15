@@ -40,7 +40,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Trang chủ<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="index.html">Trang chủ<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Thông tin</a>
@@ -71,7 +71,7 @@
 
                 <!-- Profit info button -->
                 <button type="button" id="info" class="btn btn-lg btn-warning p-2 text-white" data-toggle="modal"
-                    data-target="#infoModal">Thêm thông tin</button>
+                    data-target="#infoModal">Thêm thông tin tổng hợp</button>
 
                 <!-- Profit display -->
                 <h2 id="infoDisplay" class="d-none">Doanh thu tháng <span id="time"></span> = <span id="profit"></span>
@@ -82,7 +82,7 @@
             <!-- Button group -->
             <div class="d-flex flex-wrap justify-content-start align-items-center button-group">
                 <!-- Generated tables button -->
-                <button class="btn btn-lg btn-primary p-2 mr-auto bg-gradient" type="button" data-toggle="collapse"
+                <button id="generateButton" class="btn btn-lg btn-primary p-2 mr-auto bg-gradient" type="button" data-toggle="collapse"
                     data-target="#generate">
                     Tạo bảng
                 </button>
@@ -171,15 +171,16 @@
                         <i class="fas fa-calendar prefix" style="color: grey"></i>
                         <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_time">Nhập thời gian
                             (tháng/năm)</label>
-                        <input class="form-control" id="add_time" name="timeInput" type="text" placeholder="12/2019">
+                        <input class="form-control" id="add_time" name="timeInput" type="text" placeholder="12/2019"
+                            required>
                     </div>
 
                     <!-- Profit -->
                     <div class="md-form">
                         <i class="fas fa-dollar-sign prefix" style="color: grey"></i>
                         <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_profit">Nhập doanh thu</label>
-                        <input class="form-control" id="add_profit" name="profitInput" type="text"
-                            placeholder="900000000000000">
+                        <input class="form-control" id="add_profit" name="profitInput" type="number"
+                            placeholder="900000000000000" required>
                     </div>
                 </div>
 
@@ -219,6 +220,31 @@
         </div>
     </div>
 
+    <!-- Warning modal -->
+    <div class="modal fade" id="warningModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content shadow rounded">
+
+                <!-- Modal header -->
+                <div class="modal-header text-center bg-secondary text-white">
+                    <h4 class="modal-title w-100 font-weight-bold">THÔNG BÁO</h4>
+                    <button class="close" data-dismiss="modal" type="button">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body mx-3">
+                    <div class="text-info font-weight-bold">Vui lòng nhấn vào dòng cần thực hiện thao tác
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Add Modal -->
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -237,7 +263,7 @@
                         <i class="fas fa-pen prefix" style="color: grey"></i>
                         <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_name">Họ và tên</label>
                         <input class="form-control" id="add_name" name="nameInput" type="text"
-                            placeholder="Nguyễn Văn A">
+                            placeholder="Nguyễn Văn A" required>
                     </div>
 
                     <!-- Job title input -->
@@ -253,38 +279,41 @@
                     <div class="md-form">
                         <i class="fas fa-address-card prefix" style="color: grey"></i>
                         <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_taxId">Mã số thuế</label>
-                        <input class="form-control" id="add_taxId" name="taxIdInput" type="text"
-                            placeholder="8015731510">
+                        <input class="form-control" id="add_taxId" name="taxIdInput" type="number"
+                            placeholder="8015731510" required>
                     </div>
 
                     <!-- Base salary input -->
                     <div class="md-form">
                         <i class="fas fa-dollar-sign prefix" style="color: grey"></i>
                         <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_salary">Mức lương</label>
-                        <input class="form-control" id="add_salary" name="salaryInput" type="text"
-                            placeholder="5000000">
+                        <input class="form-control" id="add_salary" name="salaryInput" type="number"
+                            placeholder="5000000" required>
                     </div>
 
                     <!-- Workdays input -->
                     <div class="md-form">
                         <i class="fas fa-calendar prefix" style="color: grey"></i>
                         <label class="text-secondary font-weight-bold ml-1 pt-2" for="workdays">Ngày công</label>
-                        <input class="form-control" id="add_workdays" name="workdaysInput" type="text" placeholder="25">
+                        <input class="form-control" id="add_workdays" name="workdaysInput" type="number"
+                            placeholder="25" required>
                     </div>
 
                     <!-- Cafeteria days input -->
                     <div class="md-form">
                         <i class="fas fa-hamburger prefix" style="color: grey"></i>
-                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_name">Ngày công (tiền
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_cafe">Ngày công (tiền
                             cơm)</label>
-                        <input class="form-control" id="add_cafe" name="cafeInput" type="text" placeholder="25">
+                        <input class="form-control" id="add_cafe" name="cafeInput" type="number" placeholder="25"
+                            required>
                     </div>
 
                     <!-- Overtime hours input -->
                     <div class="md-form">
                         <i class="fas fa-clock prefix" style="color: grey"></i>
                         <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_overtime">Giờ làm thêm</label>
-                        <input class="form-control" id="add_overtime" name="overtimeInput" type="text" placeholder="16">
+                        <input class="form-control" id="add_overtime" name="overtimeInput" type="number"
+                            placeholder="16" required>
                     </div>
 
                     <!-- Bonus rate input -->
@@ -292,7 +321,8 @@
                         <i class="fas fa-percent prefix" style="color: grey"></i>
                         <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_bonus">Tỉ lệ % khoản bổ
                             sung</label>
-                        <input class="form-control" id="add_bonus" name="bonusInput" type="text" placeholder="38">
+                        <input class="form-control" id="add_bonus" name="bonusInput" type="number" placeholder="38"
+                            required>
                     </div>
                 </div>
 
@@ -341,7 +371,7 @@
                     <div class="md-form">
                         <i class="fas fa-address-card prefix" style="color: grey"></i>
                         <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_taxId">Mã số thuế</label>
-                        <input class="form-control" id="edit_TaxId" name="TaxIdInput" type="text"
+                        <input class="form-control" id="edit_taxId" name="TaxIdInput" type="number"
                             placeholder="8015731510" required>
                     </div>
 
@@ -349,15 +379,15 @@
                     <div class="md-form">
                         <i class="fas fa-dollar-sign prefix" style="color: grey"></i>
                         <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_salary">Mức Lương</label>
-                        <input class="form-control" id="edit_salary" name="salaryInput" type="text"
+                        <input class="form-control" id="edit_salary" name="salaryInput" type="number"
                             placeholder="3000000" required>
                     </div>
                     <!-- Workdays input -->
                     <div class="md-form">
                         <i class="fas fa-calendar prefix" style="color: grey"></i>
                         <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_workdays">Ngày công</label>
-                        <input class="form-control" id="edit_workdays" name="workdaysInput" type="text" placeholder="16"
-                            required>
+                        <input class="form-control" id="edit_workdays" name="workdaysInput" type="number"
+                            placeholder="16" required>
                     </div>
 
                     <!-- Cafeteria days input -->
@@ -365,7 +395,7 @@
                         <i class="fas fa-hamburger prefix" style="color: grey"></i>
                         <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_cafe">Ngày công (Tiền
                             cơm)</label>
-                        <input class="form-control" id="edit_cafe" name="cafeInput" type="text" placeholder="16"
+                        <input class="form-control" id="edit_cafe" name="cafeInput" type="number" placeholder="16"
                             required>
                     </div>
 
@@ -374,8 +404,8 @@
                         <i class="fas fa-clock prefix" style="color: grey"></i>
                         <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_overtime">Giờ làm
                             thêm</label>
-                        <input class="form-control" id="edit_overtime" name="overtimeInput" type="text" placeholder="10"
-                            required>
+                        <input class="form-control" id="edit_overtime" name="overtimeInput" type="number"
+                            placeholder="10" required>
                     </div>
 
                     <!-- Bonus rate input -->
@@ -383,7 +413,7 @@
                         <i class="fas fa-percent prefix" style="color: grey"></i>
                         <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_bonus">Tỉ lệ % khoản bổ
                             sung</label>
-                        <input class="form-control" id="edit_bonus" name="bonusInput" type="text" placeholder="20"
+                        <input class="form-control" id="edit_bonus" name="bonusInput" type="number" placeholder="20"
                             required>
                     </div>
                 </div>

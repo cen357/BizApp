@@ -1,4 +1,4 @@
-/** Function description: 
+/** Function description:
  *      Get the index number of the selected profile (checked box)
  *  Parameters: 
  *      + $dataTable: Bootstrap-table selector
@@ -48,7 +48,13 @@ function closeUploadModal() {
  */
 function closeAddModal() {
     $("#add_name").val('');
+    $("#add_job").val('');
+    $("#add_taxId").val('');
     $("#add_salary").val('');
+    $("#add_workdays").val('');
+    $("#add_cafe").val('');
+    $("#add_overtime").val('');
+    $("#add_bonus").val('');
     $("#addModal").modal('hide');
 }
 
@@ -61,7 +67,13 @@ function closeAddModal() {
  */
 function closeEditModal() {
     $("#edit_name").val('');
+    $("#edit_job").val('');
+    $("#edit_taxId").val('');
     $("#edit_salary").val('');
+    $("#edit_workdays").val('');
+    $("#edit_cafe").val('');
+    $("#edit_overtime").val('');
+    $("#edit_bonus").val('');
     $("#editModal").modal('hide');
 }
 
@@ -118,6 +130,7 @@ function getDataFromLocalStorage(dataKey) {
     }
     return formattedData;
 }
+
 /** Function description: 
  *      Calculate data for one row of the table
  *  Parameters: 
@@ -134,6 +147,7 @@ function calcRowData(row) {
     };
     return data;
 }
+
 /** Function description: 
  *      Calculate data for tax table
  *  Parameters: 
