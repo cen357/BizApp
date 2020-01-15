@@ -22,7 +22,7 @@ $(document).ready(function () {
     $("#back").on("click", function () {
         $overtimeTable.bootstrapTable('destroy');
         localStorage.clear();
-        window.location.href = '../../main/index.html';
+        window.location.href = '../../../index.html';
     });
 
     /** Function description: 
