@@ -5,13 +5,13 @@ $(document).ready(function () {
     let getCounter = getDataFromLocalStorage("counter");
 
     // Calculate tax data 
-    let overtimeData = calcData(getTransferData);
-    overtimeData.push(calcSumRow(overtimeData));
+    let cafeData = calcData(getTransferData);
+    cafeData.push(calcSumRow(cafeData));
 
     // Initialize tax datatable
-    let $overtimeTable = $('#overtimeTable');
-    $overtimeTable.bootstrapTable({
-        data: overtimeData
+    let $cafeTable = $('#cafeTable');
+    $cafeTable.bootstrapTable({
+        data: cafeData
     });
 
     // Update Summary
@@ -21,7 +21,7 @@ $(document).ready(function () {
 
     // Switch back to info page
     $("#back").on("click", function () {
-        $overtimeTable.bootstrapTable('destroy');
+        $cafeTable.bootstrapTable('destroy');
         localStorage.clear();
         window.location.href = '../../../index.html';
     });
@@ -34,23 +34,14 @@ $(document).ready(function () {
      *      - Oject of row data 
      */
     function calcRowData(row) {
-        let overtimeDays = ((Number(row['5'])) / 8).toFixed(2);
-        let averageSalaryPerDay = Math.round(((Number(row['2']) * 12) / 256));
-        let bonusPerDay = row['6'] * Number(averageSalaryPerDay);
-        let overtimeSalary = Math.round((Number(bonusPerDay) + Number(averageSalaryPerDay)) * Number(overtimeDays));
-        let sum = Number(overtimeSalary) + Number(overtimeSalary);
+        let cafeFee = row['3'] * 730000;
         let data = {
             'A': row['A'],
             'B': row['B'],
             '1': row['C'],
-            '2': row['5'],
-            '3': overtimeDays,
-            '4': averageSalaryPerDay,
-            '5': row['6'],
-            '6': bonusPerDay,
-            '7': overtimeSalary,
-            '8': overtimeSalary,
-            '9': sum,
+            '2': row['3'],
+            '3': 730000,
+            '4': cafeFee,
             'C': ''
         };
         return data;
@@ -79,26 +70,19 @@ $(document).ready(function () {
      *      - Object of sum row data
      */
     function calcSumRow(data) {
-        let overtimeSalarySum = 0;
-        let totalSum = 0;
+        let cafeFeeSum = 0;
 
         data.forEach(element => {
-            overtimeSalarySum += Number(element['7']);
-            totalSum += Number(element['9']);
+            cafeFeeSum += Number(element['4']);
         });
 
         let sumRow = {
             'A': '',
-            'B': 'Tổng cộng',
+            'B': 'Cộng',
             '1': '',
             '2': '',
             '3': '',
-            '4': '',
-            '5': '',
-            '6': '',
-            '7': overtimeSalarySum,
-            '8': overtimeSalarySum,
-            '9': totalSum,
+            '4': cafeFeeSum,
             'C': ''
         };
 

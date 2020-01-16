@@ -89,48 +89,31 @@
         </div>
 
         <!-- Data Table  -->
-        <table id="taxTable" data-show-export="true" data-pagination="true" data-side-pagination="server"
+        <table id="profitTable" data-show-export="true" data-pagination="true" data-side-pagination="server"
             data-click-to-select="false" data-single-select="false" data-toolbar="#toolbar" data-show-toggle="true"
             data-show-columns="true" data-unique-id="A" class="table table-striped table-bordered" style="width:
                 100%;">
             <thead class="text-center table-header">
                 <tr>
-                    <th rowspan="3">STT</th>
-                    <th rowspan="3">Họ và tên</th>
-                    <th rowspan="3">Chức danh nghề nghiệp</th>
-                    <th colspan="5">Tổng thu nhập</th>
-                    <th colspan="2" rowspan="2">Các khoản giảm trừ gồm</th>
-                    <th rowspan="3">Số tiền phải nộp thuế</th>
-                    <th rowspan="3">Thuế TNCN phải nộp</th>
+                    <th>STT</th>
+                    <th>Họ và tên</th>
+                    <th>Chức danh nghề nghiệp</th>
+                    <th>Doanh thu</th>
+                    <th>Tỉ lệ % chung</th>
+                    <th>Tỉ lệ phần trăm người lao động hưởng</th>
+                    <th>Thành tiền</th>
+                    <th>Phần việc đóng góp mang lại doanh thu cao</th>
                 </tr>
 
                 <tr>
-                    <th rowspan="2">Tổng số</th>
-                    <th colspan="4">Trong đó</th>
-                </tr>
-
-                <tr>
-                    <th>Lương</th>
-                    <th>Khoản bổ sung</th>
-                    <th>Tiền làm thêm tính theo giờ LV bình thường</th>
-                    <th>Tiền làm thêm giờ trả thêm</th>
-                    <th>BHXH-BHYT(10.5%)</th>
-                    <th>Số người phụ thuộc</th>
-                </tr>
-
-                <tr>
+                    <th data-field="A">A</th>
+                    <th data-field="B">B</th>
                     <th data-field="1">1</th>
                     <th data-field="2">2</th>
                     <th data-field="3">3</th>
-                    <th data-field="4">4=5+6+7+8</th>
+                    <th data-field="4">4</th>
                     <th data-field="5">5</th>
                     <th data-field="6">6</th>
-                    <th data-field="7">7</th>
-                    <th data-field="8">8</th>
-                    <th data-field="9">9</th>
-                    <th data-field="10">10</th>
-                    <th data-field="11">11=4-8-9-a-10b</th>
-                    <th data-field="12">12</th>
                 </tr>
             </thead>
             <tbody class="text-center">
@@ -177,7 +160,7 @@
 
     <!-- javaScript links -->
     <script type="text/javaScript" src="../../main/scripts/helpers.js"></script>
-    <script type="text/javaScript" src="scripts/tax.js"></script>
+    <script type="text/javaScript" src="scripts/profit.js"></script>
 </body>
 
 </html>
