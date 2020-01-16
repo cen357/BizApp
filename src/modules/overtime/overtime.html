@@ -79,12 +79,6 @@
                 <Button class="btn btn-lg btn-primary bg-gradient p-2" data-toggle="collapse"
                     data-target="#summary">Tổng
                     kết</Button>
-
-                <!--  Import JSON file for dataTable -->
-                <div class="pb-0 mt-4" hidden>
-                    <label for="import">Tải lên</label>
-                    <input type="file" name="import" id="import" multiple>
-                </div>
             </div>
 
             <!-- Summary content -->
@@ -101,7 +95,7 @@
                 100%;">
             <thead class="text-center table-header">
                 <tr>
-                    <th colspan="2">STT</th>
+                    <th>STT</th>
                     <th>Họ và tên</th>
                     <th>Chức danh nghề nghiệp</th>
                     <th>Giờ làm thêm</th>
@@ -116,7 +110,6 @@
                 </tr>
 
                 <tr>
-                    <th data-field="state" data-checkbox="true"></th>
                     <th data-field="A">A</th>
                     <th data-field="B">B</th>
                     <th data-field="1">1</th>
@@ -131,7 +124,7 @@
                     <th data-field="C">C</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="text-center">
             </tbody>
         </table>
     </div>

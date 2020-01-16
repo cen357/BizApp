@@ -17,8 +17,8 @@ $(document).ready(function () {
 
     profileData = [{
             "A": 1,
-            "B": "Anthony",
-            "C": "Developer",
+            "B": "Steve the Cat",
+            "C": "CEO",
             "1": 4322,
             "2": 2,
             "3": 14,
@@ -29,7 +29,7 @@ $(document).ready(function () {
         },
         {
             "A": 2,
-            "B": "Jane",
+            "B": "Mr.Cat",
             "C": "Developer",
             "1": 6232,
             "2": 1,

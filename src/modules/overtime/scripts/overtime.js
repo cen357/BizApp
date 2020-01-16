@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    // Get data from info page
     let getTransferData = getDataFromLocalStorage("dataTable");
     let getInfoData = getDataFromLocalStorage("infoData");
     let getCounter = getDataFromLocalStorage("counter");
