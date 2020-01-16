@@ -82,10 +82,13 @@
             <!-- Button group -->
             <div class="d-flex flex-wrap justify-content-start align-items-center button-group">
                 <!-- Generated tables button -->
-                <button id="generateButton" class="btn btn-lg btn-primary p-2 mr-auto bg-gradient" type="button"
-                    data-toggle="collapse" data-target="#generate">
-                    Tạo bảng
-                </button>
+                <span class="mr-auto" data-toggle="tooltip" data-placement="top"
+                    title="Bảng phải có ít nhất 1 dòng và có thông tin thông tin tổng hợp">
+                    <button id="generateButton" class="btn btn-lg btn-primary p-2 bg-gradient" type="button"
+                        data-toggle="collapse" data-target="#generate">
+                        Tạo bảng
+                    </button>
+                </span>
 
                 <!-- Import JSON file -->
                 <button type="button" id="upload" class="btn btn-lg btn-success p-2" data-toggle="modal"
@@ -128,10 +131,10 @@
                     <th>Mã số thuế</th>
                     <th>Mức lương</th>
                     <th>Ngày công</th>
-                    <th>Ngày công (tiền cơm)</th>
+                    <th>Ngày công thực tế (tính tiền cơm)</th>
                     <th>Giờ làm thêm</th>
                     <th>Tỉ lệ % khoản bổ sung</th>
-                    <th>Bình quân lương CB/ngày</th>
+                    <th>Số người phụ thuộc BHYT</th>
                 </tr>
 
                 <tr>
@@ -304,8 +307,8 @@
                     <!-- Cafeteria days input -->
                     <div class="md-form">
                         <i class="fas fa-hamburger prefix" style="color: grey"></i>
-                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_cafe">Ngày công (tiền
-                            cơm)</label>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_cafe">Ngày công thực tế (tính
+                            tiền cơm) - Nhập 0 nếu không có</label>
                         <input class="form-control" id="add_cafe" name="cafeInput" type="number" placeholder="25"
                             required>
                     </div>
@@ -327,13 +330,13 @@
                             required>
                     </div>
 
-                    <!-- Average salary rate input -->
+                    <!-- Number of people depend on insurance input -->
                     <div class="md-form">
-                        <i class="fas fa-dollar-sign prefix" style="color: grey"></i>
-                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_avgSalary">Bình quân lương
-                            CB/ngày</label>
-                        <input class="form-control" id="add_avgSalary" name="avgSalaryInput" type="number"
-                            placeholder="10" required>
+                        <i class="fas fa-user prefix" style="color: grey"></i>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_insurance">Số người phụ thuộc
+                            BHYT</label>
+                        <input class="form-control" id="add_insurance" name="insuranceInput" type="number"
+                            placeholder="0" required>
                     </div>
                 </div>
 
@@ -404,8 +407,8 @@
                     <!-- Cafeteria days input -->
                     <div class="md-form">
                         <i class="fas fa-hamburger prefix" style="color: grey"></i>
-                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_cafe">Ngày công (Tiền
-                            cơm)</label>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_cafe">Ngày công thực tế (Tính
+                            tiền cơm) - Nhập 0 nếu không có</label>
                         <input class="form-control" id="edit_cafe" name="cafeInput" type="number" placeholder="16"
                             required>
                     </div>
@@ -428,13 +431,13 @@
                             required>
                     </div>
 
-                    <!-- Avarage Salary rate input -->
+                    <!-- Number of people depend on insurance input -->
                     <div class="md-form">
-                        <i class="fas fa-dollar-sign prefix" style="color: grey"></i>
-                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_avgSalary">Bình quân lương
-                            CB/ngày</label>
-                        <input class="form-control" id="edit_avgSalary" name="avgSalaryInput" type="number"
-                            placeholder="21" required>
+                        <i class="fas fa-user prefix" style="color: grey"></i>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_insurance">Số người phụ thuộc
+                            BHYT</label>
+                        <input class="form-control" id="edit_insurance" name="insuranceInput" type="number"
+                            placeholder="2" required>
                     </div>
                 </div>
 
