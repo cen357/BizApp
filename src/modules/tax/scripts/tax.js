@@ -1,11 +1,12 @@
 $(document).ready(function () {
+    // Get data from info page
     let getTransferData = getDataFromLocalStorage("dataTable");
     let getInfoData = getDataFromLocalStorage("infoData");
     let getCounter = getDataFromLocalStorage("counter");
 
     // Calculate tax data 
-    let taxData = calcTaxData(getTransferData);
-    taxData.push(calcTaxSumRow(taxData));
+    let taxData = calcData(getTransferData);
+    taxData.push(calcSumRow(taxData));
 
     // Initialize tax datatable
     let $taxTable = $('#taxTable');
@@ -26,37 +27,44 @@ $(document).ready(function () {
     });
 
     /** Function description: 
-     *      Get data from local storage
-     *  Parameters: 
-     *      + Data key
-     *  Returns: 
-     *      - Formatted json data or normal data
-     */
-    function getDataFromLocalStorage(dataKey) {
-        let data = window.localStorage.getItem(dataKey);
-        let formattedData = null;
-        try {
-            formattedData = JSON.parse(data);
-        } catch (e) {
-            //get normal data if not json
-            formattedData = data;
-        }
-        return formattedData;
-    }
-
-    /** Function description: 
      *      Calculate data for one row of the table
      *  Parameters: 
      *      + row: one row from table
      *  Returns: 
      *      - Oject of row data 
      */
-    function calcTaxRowData(row) {
+    function calcRowData(row) {
+        const defaultInsuranceFee = 9000000;
+        const bonusInsuranceFeePerPerson = 3600000;
+        // Profit sheet data
+        let profitPercent = Math.round((Number(getInfoData.profit) * 15) / 100);
+        let totalMoney = Number(row['6']) * profitPercent;
+
+        // Overtime sheet data
+        let overtimeDays = ((Number(row['5'])) / 8).toFixed(2);
+        let averageSalaryPerDay = Math.round(((Number(row['2']) * 12) / 256));
+        let bonusPerDay = row['6'] * Number(averageSalaryPerDay);
+        let overtimeSalary = Math.round((Number(bonusPerDay) + Number(averageSalaryPerDay)) * Number(overtimeDays));
+
+        // Tax sheet data
+        let salary = Number(row['2']);
+        let totalSum = Number(salary) + Number(totalMoney) + Number(overtimeSalary) * 2;
+        let insuranceFee = Math.round(Number(salary) * 10.5 / 100);
+        let totalTaxPaymentAmount = Number(totalSum) - Number(overtimeSalary) - Number(insuranceFee) - Number(defaultInsuranceFee) - (Number(row['7']) * Number(bonusInsuranceFeePerPerson));
+        let realTaxPaymentAmount = Math.round((Number(totalTaxPaymentAmount) * 5) / 100);
         let data = {
-            'A': row['A'],
-            'B': row['B'],
-            '1': row['1'],
-            '2=1*15%': (row['1'] * 15) / 100
+            '1': row['A'],
+            '2': row['B'],
+            '3': row['C'],
+            '4': totalSum,
+            '5': salary,
+            '6': totalMoney,
+            '7': overtimeSalary,
+            '8': overtimeSalary,
+            '9': insuranceFee,
+            '10': row['7'],
+            '11': totalTaxPaymentAmount,
+            '12': realTaxPaymentAmount
         };
         return data;
     }
@@ -64,40 +72,57 @@ $(document).ready(function () {
     /** Function description: 
      *      Calculate data for tax table
      *  Parameters: 
-     *      + table: taxData
+     *      + table: table data
      *  Returns: 
      *      - Array of objects of table data
      */
-    function calcTaxData(table) {
+    function calcData(table) {
         let data = [];
         table.forEach(element => {
-            data.push(calcTaxRowData(element));
+            data.push(calcRowData(element));
         });
-
         return data;
     }
 
     /** Function description: 
      *      Calculate sum row data at the end of the table
      *  Parameters: 
-     *      + data
+     *      + data: table data
      *  Returns: 
      *      - Object of sum row data
      */
-    function calcTaxSumRow(data) {
+    function calcSumRow(data) {
+        let totalSum = 0;
         let salarySum = 0;
-        let taxSum = 0;
+        let bonusSum = 0;
+        let overtimeSalarySum = 0;
+        let insuranceFeeSum = 0;
+        let totalTaxPaymentAmountSum = 0;
+        let realTaxPaymentAmountSum = 0;
 
         data.forEach(element => {
-            salarySum += Number(element['1']);
-            taxSum += Number(element['2=1*15%']);
+            totalSum += Number(element['4']);
+            salarySum += Number(element['5']);
+            bonusSum += Number(element['6']);
+            overtimeSalarySum += Number(element['7']);
+            insuranceFeeSum += Number(element['9']);
+            totalTaxPaymentAmountSum += Number(element['11']);
+            realTaxPaymentAmountSum += Number(element['12']);
         });
 
         let sumRow = {
-            'A': '',
-            'B': 'Tổng cộng',
-            '1': salarySum,
-            '2=1*15%': taxSum
+            '1': '',
+            '2': 'Tổng cộng',
+            '3': '',
+            '4': totalSum,
+            '5': salarySum,
+            '6': bonusSum,
+            '7': overtimeSalarySum,
+            '8': overtimeSalarySum,
+            '9': insuranceFeeSum,
+            '10': '',
+            '11': totalTaxPaymentAmountSum,
+            '12': realTaxPaymentAmountSum
         };
 
         return sumRow;
