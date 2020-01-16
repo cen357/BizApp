@@ -134,6 +134,7 @@
                     <th>Ngày công thực tế (tính tiền cơm)</th>
                     <th>Giờ làm thêm</th>
                     <th>Tỉ lệ % khoản bổ sung</th>
+                    <th>Số người phụ thuộc BHYT</th>
                 </tr>
 
                 <tr>
@@ -147,6 +148,7 @@
                     <th data-field="4">4</th>
                     <th data-field="5">5</th>
                     <th data-field="6">6</th>
+                    <th data-field="7">7</th>
                 </tr>
             </thead>
             <tbody class="text-center">
@@ -327,6 +329,15 @@
                         <input class="form-control" id="add_bonus" name="bonusInput" type="number" placeholder="38"
                             required>
                     </div>
+
+                    <!-- Number of people depend on insurance input -->
+                    <div class="md-form">
+                        <i class="fas fa-user prefix" style="color: grey"></i>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_insurance">Số người phụ thuộc
+                            BHYT</label>
+                        <input class="form-control" id="add_insurance" name="insuranceInput" type="number"
+                            placeholder="0" required>
+                    </div>
                 </div>
 
                 <!-- Modal footer -->
@@ -418,6 +429,15 @@
                             sung</label>
                         <input class="form-control" id="edit_bonus" name="bonusInput" type="number" placeholder="20"
                             required>
+                    </div>
+
+                    <!-- Number of people depend on insurance input -->
+                    <div class="md-form">
+                        <i class="fas fa-user prefix" style="color: grey"></i>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_insurance">Số người phụ thuộc
+                            BHYT</label>
+                        <input class="form-control" id="edit_insurance" name="insuranceInput" type="number"
+                            placeholder="2" required>
                     </div>
                 </div>
 

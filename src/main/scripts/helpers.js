@@ -72,6 +72,7 @@ function closeAddModal() {
     $("#add_cafe").val('');
     $("#add_overtime").val('');
     $("#add_bonus").val('');
+    $("#add_insurance").val('');
     $("#addModal").modal('hide');
 }
 
@@ -91,6 +92,7 @@ function closeEditModal() {
     $("#edit_cafe").val('');
     $("#edit_overtime").val('');
     $("#edit_bonus").val('');
+    $("#edit_insurance").val('');
     $("#editModal").modal('hide');
 }
 
