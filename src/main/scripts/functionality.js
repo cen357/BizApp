@@ -258,7 +258,7 @@ $(document).ready(function () {
     });
 
     // Switch over to profit table page
-    $("#profit").on("click", function () {
+    $(document).on("click", "#profit", function () {
         // Save data from table to local storage for transfer
         let setTransferData = $table.bootstrapTable('getData');
         saveDataToLocalStorage("dataTable", setTransferData);
