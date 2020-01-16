@@ -8,7 +8,7 @@ $(document).ready(function () {
     let Info;
 
     Info = {
-        time: "1",
+        time: "",
         profit: 0
     };
 
@@ -24,8 +24,7 @@ $(document).ready(function () {
             "3": 14,
             "4": 14,
             "5": 2,
-            "6": 1,
-            "7": 32
+            "6": 1
         },
         {
             "A": 2,
@@ -36,8 +35,7 @@ $(document).ready(function () {
             "3": 10,
             "4": 10,
             "5": 4,
-            "6": 5,
-            "7": 30
+            "6": 5
         }
     ];
 
@@ -88,16 +86,13 @@ $(document).ready(function () {
                     }, {
                         field: '6',
                         title: '6'
-                    }, {
-                        field: '7',
-                        title: '7'
                     }
                 ]
             });
         }).trigger('change');
     });
 
-    // Add information below title
+    // Add information below the title
     $('#info').on('click', function () {
         $('#info_save').on('click', function () {
             Info.time = $('#add_time').val();
@@ -147,27 +142,24 @@ $(document).ready(function () {
     });
 
     // Add new profile
-    $('#add').on('click', function () {
-        $("#add_save").on('click', function (e) {
-            $table.bootstrapTable('insertRow', {
-                index: counter,
-                row: {
-                    "A": ++counter,
-                    "B": $('#add_name').val(),
-                    "C": $('#add_job').val(),
-                    "1": Number($('#add_taxId').val()),
-                    "2": Number($('#add_salary').val()),
-                    "3": Number($('#add_workdays').val()),
-                    "4": Number($('#add_cafe').val()),
-                    "5": Number($('#add_overtime').val()),
-                    "6": Number($('#add_bonus').val()),
-                    "7": Number($('#add_avgSalary').val())
-                }
-            });
-
-            checkGenerateButton(counter, Info.profit);
-            closeAddModal();
+    $("#add_save").on('click', function (e) {
+        $table.bootstrapTable('insertRow', {
+            index: counter,
+            row: {
+                "A": ++counter,
+                "B": $('#add_name').val(),
+                "C": $('#add_job').val(),
+                "1": Number($('#add_taxId').val()),
+                "2": Number($('#add_salary').val()),
+                "3": Number($('#add_workdays').val()),
+                "4": Number($('#add_cafe').val()),
+                "5": Number($('#add_overtime').val()),
+                "6": Number($('#add_bonus').val()),
+            }
         });
+
+        checkGenerateButton(counter, Info.profit);
+        closeAddModal();
     });
 
     // Stop action and show warning if no row is selected 
@@ -196,7 +188,6 @@ $(document).ready(function () {
                 "4": Number($('#edit_cafe').val()),
                 "5": Number($('#edit_overtime').val()),
                 "6": Number($('#edit_bonus').val()),
-                "7": Number($('#edit_avgSalary').val())
             }
         });
 
