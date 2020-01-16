@@ -34,17 +34,18 @@ $(document).ready(function () {
      *      - Oject of row data 
      */
     function calcRowData(row) {
-        let overtimeDays = ((row['5']) / 8).toFixed(2);
-        let bonusPerDay = row['6'] * row['7'];
-        let overtimeSalary = (bonusPerDay + row['7']) * overtimeDays;
-        let sum = overtimeSalary + overtimeSalary;
+        let overtimeDays = ((Number(row['5'])) / 8).toFixed(2);
+        let averageSalaryPerDay = Math.round(((Number(row['2']) * 12) / 256));
+        let bonusPerDay = row['6'] * Number(averageSalaryPerDay);
+        let overtimeSalary = Math.round((Number(bonusPerDay) + Number(averageSalaryPerDay)) * Number(overtimeDays));
+        let sum = Number(overtimeSalary) + Number(overtimeSalary);
         let data = {
             'A': row['A'],
             'B': row['B'],
             '1': row['C'],
             '2': row['5'],
             '3': overtimeDays,
-            '4': row['7'],
+            '4': averageSalaryPerDay,
             '5': row['6'],
             '6': bonusPerDay,
             '7': overtimeSalary,
