@@ -24,7 +24,8 @@ $(document).ready(function () {
             "3": 14,
             "4": 14,
             "5": 2,
-            "6": 1
+            "6": 1,
+            "7": 1
         },
         {
             "A": 2,
@@ -35,7 +36,8 @@ $(document).ready(function () {
             "3": 10,
             "4": 10,
             "5": 4,
-            "6": 5
+            "6": 5,
+            "7": 2
         }
     ];
 
@@ -86,6 +88,9 @@ $(document).ready(function () {
                     }, {
                         field: '6',
                         title: '6'
+                    }, {
+                        field: '7',
+                        title: '7'
                     }
                 ]
             });
@@ -155,6 +160,7 @@ $(document).ready(function () {
                 "4": Number($('#add_cafe').val()),
                 "5": Number($('#add_overtime').val()),
                 "6": Number($('#add_bonus').val()),
+                "7": Number($('#add_insurance').val()),
             }
         });
 
@@ -188,6 +194,7 @@ $(document).ready(function () {
                 "4": Number($('#edit_cafe').val()),
                 "5": Number($('#edit_overtime').val()),
                 "6": Number($('#edit_bonus').val()),
+                "7": Number($('#edit_insurance').val()),
             }
         });
 
@@ -251,7 +258,7 @@ $(document).ready(function () {
     });
 
     // Switch over to profit table page
-    $("#profit").on("click", function () {
+    $(document).on("click", "#profit", function () {
         // Save data from table to local storage for transfer
         let setTransferData = $table.bootstrapTable('getData');
         saveDataToLocalStorage("dataTable", setTransferData);
