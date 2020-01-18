@@ -35,7 +35,7 @@ $(document).ready(function () {
      */
     function calcRowData(row) {
         let profitPercent = Math.round((Number(getInfoData.profit) * 15) / 100);
-        let totalMoney = Number(row['6']) * profitPercent;
+        let totalBonusMoney = Number(row['6']) * profitPercent;
         let data = {
             'A': row['A'],
             'B': row['B'],
@@ -43,7 +43,7 @@ $(document).ready(function () {
             '2': getInfoData.profit,
             '3': profitPercent,
             '4': row['6'],
-            '5': totalMoney,
+            '5': totalBonusMoney,
             '6': 'Bảo hộ nhãn hiệu canon',
         };
         return data;
