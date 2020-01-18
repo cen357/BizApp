@@ -4,14 +4,14 @@ $(document).ready(function () {
     let getInfoData = getDataFromLocalStorage("infoData");
     let getCounter = getDataFromLocalStorage("counter");
 
-    // Calculate tax data 
-    let overtimeData = calcData(getTransferData);
-    overtimeData.push(calcSumRow(overtimeData));
+    // Calculate profit data 
+    let profitData = calcData(getTransferData);
+    profitData.push(calcSumRow(profitData));
 
     // Initialize tax datatable
-    let $overtimeTable = $('#overtimeTable');
-    $overtimeTable.bootstrapTable({
-        data: overtimeData
+    let $profitTable = $('#profitTable');
+    $profitTable.bootstrapTable({
+        data: profitData
     });
 
     // Update Summary
@@ -21,7 +21,7 @@ $(document).ready(function () {
 
     // Switch back to info page
     $("#back").on("click", function () {
-        $overtimeTable.bootstrapTable('destroy');
+        $profitTable.bootstrapTable('destroy');
         localStorage.clear();
         window.location.href = '../../../index.html';
     });
@@ -34,24 +34,17 @@ $(document).ready(function () {
      *      - Oject of row data 
      */
     function calcRowData(row) {
-        let overtimeDays = ((Number(row['5'])) / 8).toFixed(2);
-        let averageSalaryPerDay = Math.round(((Number(row['2']) * 12) / 256));
-        let bonusPerDay = row['6'] * Number(averageSalaryPerDay);
-        let overtimeSalary = Math.round((Number(bonusPerDay) + Number(averageSalaryPerDay)) * Number(overtimeDays));
-        let sum = Number(overtimeSalary) + Number(overtimeSalary);
+        let profitPercent = Math.round((Number(getInfoData.profit) * 15) / 100);
+        let totalBonusMoney = Number(row['6']) * profitPercent;
         let data = {
             'A': row['A'],
             'B': row['B'],
             '1': row['C'],
-            '2': row['5'],
-            '3': overtimeDays,
-            '4': averageSalaryPerDay,
-            '5': row['6'],
-            '6': bonusPerDay,
-            '7': overtimeSalary,
-            '8': overtimeSalary,
-            '9': sum,
-            'C': ''
+            '2': getInfoData.profit,
+            '3': profitPercent,
+            '4': row['6'],
+            '5': totalBonusMoney,
+            '6': 'Bảo hộ nhãn hiệu canon',
         };
         return data;
     }
@@ -79,12 +72,12 @@ $(document).ready(function () {
      *      - Object of sum row data
      */
     function calcSumRow(data) {
-        let overtimeSalarySum = 0;
+        let percentSum = 0;
         let totalSum = 0;
 
         data.forEach(element => {
-            overtimeSalarySum += Number(element['7']);
-            totalSum += Number(element['9']);
+            percentSum += Number(element['4']);
+            totalSum += Number(element['5']);
         });
 
         let sumRow = {
@@ -93,13 +86,9 @@ $(document).ready(function () {
             '1': '',
             '2': '',
             '3': '',
-            '4': '',
-            '5': '',
+            '4': percentSum,
+            '5': totalSum,
             '6': '',
-            '7': overtimeSalarySum,
-            '8': overtimeSalarySum,
-            '9': totalSum,
-            'C': ''
         };
 
         return sumRow;

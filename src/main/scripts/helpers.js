@@ -24,10 +24,10 @@ function getIdSelection($dataTable) {
  */
 function checkGenerateButton(profileCounter, profitData) {
     let generate = document.querySelector('#generateButton');
-    if ((profileCounter === 0) && (profitData === 0)) {
-        generate.disabled = true;
-    } else {
+    if ((profileCounter !== 0) && (profitData !== 0)) {
         generate.disabled = false;
+    } else {
+        generate.disabled = true;
     }
 }
 
@@ -72,7 +72,7 @@ function closeAddModal() {
     $("#add_cafe").val('');
     $("#add_overtime").val('');
     $("#add_bonus").val('');
-    $("#add_avgSalary").val('');
+    $("#add_insurance").val('');
     $("#addModal").modal('hide');
 }
 
@@ -92,7 +92,7 @@ function closeEditModal() {
     $("#edit_cafe").val('');
     $("#edit_overtime").val('');
     $("#edit_bonus").val('');
-    $("#edit_avgSalary").val('');
+    $("#edit_insurance").val('');
     $("#editModal").modal('hide');
 }
 
